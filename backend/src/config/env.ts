@@ -26,9 +26,18 @@ function readCorsOrigins(): string[] {
     .filter(Boolean);
 }
 
+function readRequired(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Variable d'environnement manquante : ${name} (voir .env.example)`);
+  }
+  return value;
+}
+
 export const env = {
   nodeEnv: readNodeEnv(),
   port: readPort(),
   corsOrigins: readCorsOrigins(),
+  databaseUrl: readRequired('DATABASE_URL'),
   isProduction: process.env.NODE_ENV === 'production',
 } as const;

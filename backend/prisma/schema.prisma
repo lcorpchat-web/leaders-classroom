@@ -1,0 +1,189 @@
+// Modèle de données de Leaders Classroom.
+// Source : Cahier de conception v1.0 — figure 4 (diagramme de classes) et section 10 (modèle physique).
+// Champs en camelCase côté code (noms du diagramme de classes), tables et colonnes en snake_case
+// en base (noms de la section 10).
+
+generator client {
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  moduleFormat        = "esm"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// Énumérations (figure 4)
+// ---------------------------------------------------------------------------
+
+/// Les trois profils sont stockés dans une seule table, distingués par cette colonne (section 10).
+enum Role {
+  ADMIN
+  ENSEIGNANT
+  APPRENANT
+}
+
+/// Cycle de vie d'une séance (figure 10).
+enum StatutSeance {
+  PROGRAMMEE
+  EN_COURS
+  TERMINEE
+  ANNULEE
+}
+
+/// Calculé à la clôture de la séance (RG6, figure 8).
+enum StatutPresence {
+  PRESENT
+  RETARD
+  ABSENT
+}
+
+/// Cycle de vie d'une inscription (figure 11).
+enum StatutInscription {
+  EN_ATTENTE
+  VALIDEE
+  RETIREE
+}
+
+// ---------------------------------------------------------------------------
+// Classes du domaine
+// ---------------------------------------------------------------------------
+
+/// Classe abstraite Utilisateur spécialisée en Administrateur, Enseignant et Apprenant.
+/// RG7 : un compte désactivé (actif = false) ne peut plus se connecter, son historique est conservé.
+model Utilisateur {
+  id                String      @id @default(uuid()) @db.Uuid
+  nom               String
+  prenom            String
+  email             String   @unique
+  telephone         String?
+  motDePasseHache   String   @map("mot_de_passe_hache")
+  role              Role
+  /// Apprenant uniquement (unique)
+  matricule         String?  @unique
+  /// Enseignant uniquement
+  specialite        String?
+  actif             Boolean  @default(true)
+  creeLe            DateTime @default(now()) @map("cree_le")
+
+  /// Enseignant — « enseigne » (classes affectées)
+  affectations      Affectation[]
+  /// Apprenant — « suit » (classe d'association Inscription)
+  inscriptions      Inscription[]
+  /// Enseignant — « animateur » des séances
+  seancesAnimees    Seance[]
+  /// « participant » — une présence par entrée dans une salle
+  presences         Presence[]
+
+  @@map("utilisateurs")
+}
+
+/// RG1 : une classe est animée par au moins un enseignant (1..*).
+model Classe {
+  id          String       @id @default(uuid()) @db.Uuid
+  nom         String
+  description String?
+  dateDebut   DateTime  @map("date_debut") @db.Date
+  dateFin     DateTime? @map("date_fin") @db.Date
+  active      Boolean   @default(true)
+
+  affectations Affectation[]
+  inscriptions Inscription[]
+  seances      Seance[]
+  supports     Support[]
+
+  @@map("classes")
+}
+
+/// Association « enseigne » entre Enseignant et Classe.
+model Affectation {
+  classeId     String      @db.Uuid @map("classe_id")
+  enseignantId String      @db.Uuid @map("enseignant_id")
+  affecteLe    DateTime @default(now()) @map("affecte_le")
+
+  classe     Classe      @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  enseignant Utilisateur @relation(fields: [enseignantId], references: [id], onDelete: Cascade)
+
+  @@id([classeId, enseignantId])
+  @@map("affectations")
+}
+
+/// Classe d'association « suit » entre Apprenant et Classe.
+/// RG2 : seules les inscriptions VALIDEE donnent accès aux séances et aux supports.
+model Inscription {
+  classeId        String               @db.Uuid @map("classe_id")
+  apprenantId     String               @db.Uuid @map("apprenant_id")
+  dateInscription DateTime          @default(now()) @map("date_inscription")
+  statut          StatutInscription @default(EN_ATTENTE)
+
+  classe    Classe      @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  apprenant Utilisateur @relation(fields: [apprenantId], references: [id], onDelete: Cascade)
+
+  @@id([classeId, apprenantId])
+  @@map("inscriptions")
+}
+
+/// RG3 : une séance appartient à une seule classe (composition) ; sa suppression entraîne celle de ses présences.
+/// La réunion BigBlueButton n'est créée qu'au premier démarrage (figure 6) : meetingIdBBB reste vide avant.
+model Seance {
+  id           String          @id @default(uuid()) @db.Uuid
+  classeId     String          @db.Uuid @map("classe_id")
+  enseignantId String          @db.Uuid @map("enseignant_id")
+  titre        String
+  debut        DateTime
+  dureeMinutes Int          @map("duree_minutes")
+  statut       StatutSeance @default(PROGRAMMEE)
+  meetingIdBBB String?      @unique @map("meeting_id_bbb")
+  enregistree  Boolean      @default(false)
+
+  classe     Classe      @relation(fields: [classeId], references: [id], onDelete: Cascade)
+  enseignant Utilisateur @relation(fields: [enseignantId], references: [id], onDelete: Restrict)
+  presences  Presence[]
+  supports   Support[]
+
+  @@index([classeId, debut])
+  @@map("seances")
+}
+
+/// RG6 : une présence est créée à chaque entrée dans la salle ; les reconnexions cumulent la durée.
+/// Le statut est calculé à la clôture (figure 8) ; les apprenants inscrits sans entrée reçoivent
+/// une présence ABSENT.
+model Presence {
+  id            String             @id @default(uuid()) @db.Uuid
+  seanceId      String             @db.Uuid @map("seance_id")
+  utilisateurId String             @db.Uuid @map("utilisateur_id")
+  /// Vide uniquement pour une présence ABSENT créée à la clôture
+  arrivee       DateTime?
+  depart        DateTime?
+  dureeMinutes  Int             @default(0) @map("duree_minutes")
+  /// Vide tant que la séance n'est pas clôturée
+  statut        StatutPresence?
+
+  seance      Seance      @relation(fields: [seanceId], references: [id], onDelete: Cascade)
+  utilisateur Utilisateur @relation(fields: [utilisateurId], references: [id], onDelete: Restrict)
+
+  @@index([seanceId])
+  @@index([utilisateurId])
+  @@map("presences")
+}
+
+/// RG8 : un support est rattaché à une classe et, facultativement, à une séance précise.
+/// Le fichier est stocké dans uploads/ et servi par l'API après contrôle des droits.
+model Support {
+  id           String      @id @default(uuid()) @db.Uuid
+  classeId     String      @db.Uuid @map("classe_id")
+  seanceId     String?     @db.Uuid @map("seance_id")
+  titre        String
+  nomFichier   String   @map("nom_fichier")
+  typeMime     String   @map("type_mime")
+  tailleOctets Int      @map("taille_octets")
+  deposeLe     DateTime @default(now()) @map("depose_le")
+
+  classe Classe  @relation(fields: [classeId], references: [id], onDelete: Restrict)
+  seance Seance? @relation(fields: [seanceId], references: [id], onDelete: SetNull)
+
+  @@index([classeId])
+  @@map("supports")
+}

@@ -3,6 +3,8 @@ node_modules/
 
 # Builds
 dist/
+# Client Prisma généré (npm run db:generate)
+backend/src/generated/
 dist-ssr/
 *.tsbuildinfo
 

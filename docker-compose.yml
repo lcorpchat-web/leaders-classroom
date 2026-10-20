@@ -1,0 +1,28 @@
+# Base de données de développement de Leaders Classroom.
+# PostgreSQL 16, version recommandée par le diagramme de déploiement (cahier de conception, figure 13).
+# Démarrage : docker compose up -d    |    Arrêt : docker compose down
+# Port 5434 côté machine : 5432 et 5433 sont déjà utilisés sur le poste de développement.
+name: leaders-classroom
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: leaders-classroom-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: leaders
+      POSTGRES_PASSWORD: leaders
+      POSTGRES_DB: leaders_classroom
+      TZ: UTC
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U leaders -d leaders_classroom"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:
