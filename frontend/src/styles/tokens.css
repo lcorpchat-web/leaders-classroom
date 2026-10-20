@@ -1,0 +1,82 @@
+/*
+ * Jetons de design de Leaders Classroom (charte de l'Institut, relevée sur les maquettes).
+ * Toute couleur, taille ou ombre utilisée dans les composants doit venir d'ici.
+ */
+:root {
+  /* Couleurs de marque */
+  --color-primary: #fe7401;
+  --color-primary-hover: #e96800;
+  --color-primary-soft: #fff0e4;
+  --color-primary-tint: rgb(254 116 1 / 0.2);
+
+  /* Textes */
+  --color-text: #1e2433;
+  --color-text-muted: #5b6475;
+  --color-text-inverse: #ffffff;
+  --color-text-inverse-muted: rgb(255 255 255 / 0.9);
+
+  /* Surfaces */
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-warm: #fef4ec;
+  --color-border: #eef0f3;
+  --color-border-warm: #fed1af;
+  --color-hero-bg: #15110b;
+  --color-navy: #051d32;
+  --color-navy-light: #0b3460;
+
+  /* Liens, formulaires et états */
+  --color-link: #1a6fe0;
+  --color-input-border: #dce2eb;
+  --color-placeholder: #939db2;
+  --color-danger: #c62828;
+  --color-danger-soft: #fdecea;
+  --color-info: #1a5fb4;
+  --color-info-soft: #e8f1fd;
+
+  /* Typographie */
+  --font-sans: 'Inter Variable', system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-size-sm: 0.9375rem;  /* 15px */
+  --font-size-md: 1.0625rem;  /* 17px */
+  --font-size-lg: 1.1875rem;  /* 19px */
+  --font-size-xl: 1.375rem;   /* 22px */
+  --font-size-2xl: 1.75rem;   /* 28px */
+  --font-size-hero: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Espacements */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Formes */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-pill: 999px;
+  --shadow-card: 0 2px 4px rgb(16 24 40 / 0.03), 0 8px 24px rgb(16 24 40 / 0.06);
+  --shadow-button: 0 6px 16px rgb(254 116 1 / 0.28);
+
+  /* Mise en page */
+  --container-max: 1380px;
+  --container-gutter: clamp(1rem, 4vw, 2rem);
+  --header-height: 7.375rem; /* 118px */
+  --transition-fast: 150ms ease;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --header-height: 4.5rem;
+  }
+}

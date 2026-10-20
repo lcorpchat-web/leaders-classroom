@@ -34,10 +34,33 @@ function readRequired(name: string): string {
   return value;
 }
 
+function readSecret(name: string, minLength = 32): string {
+  const value = readRequired(name);
+  if (value.length < minLength) {
+    throw new Error(`${name} doit contenir au moins ${minLength} caractères`);
+  }
+  return value;
+}
+
+function readPositiveInt(name: string, fallback: number): number {
+  const value = Number(process.env[name] ?? fallback);
+  if (!Number.isInteger(value) || value <= 0) {
+    throw new Error(`${name} invalide : "${process.env[name]}" (entier positif attendu)`);
+  }
+  return value;
+}
+
+const nodeEnv = readNodeEnv();
+
 export const env = {
-  nodeEnv: readNodeEnv(),
+  nodeEnv,
+  isProduction: nodeEnv === 'production',
   port: readPort(),
   corsOrigins: readCorsOrigins(),
   databaseUrl: readRequired('DATABASE_URL'),
-  isProduction: process.env.NODE_ENV === 'production',
+  jwtSecret: readSecret('JWT_SECRET'),
+  /** Durée d'une session standard (cookie de session, fermé avec le navigateur) */
+  sessionDureeHeures: readPositiveInt('SESSION_DUREE_HEURES', 8),
+  /** Durée d'une session « Se souvenir de moi » (cookie persistant) */
+  sessionSouvenirJours: readPositiveInt('SESSION_SOUVENIR_JOURS', 30),
 } as const;

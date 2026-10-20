@@ -1,0 +1,115 @@
+.page {
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* Forme orange en haut à droite */
+.page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22%;
+  height: 32%;
+  background: linear-gradient(160deg, #ff8a1f 0%, var(--color-primary) 60%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.zone {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-8);
+  width: min(42rem, 100%);
+  margin-left: auto;
+  padding: var(--space-6) var(--space-6) var(--space-6) 0;
+}
+
+/* Sélecteur de langue */
+.langue {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.langueSelect {
+  appearance: none;
+  min-height: 3rem;
+  padding-right: var(--space-6);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.langueChevron {
+  position: absolute;
+  right: var(--space-4);
+  pointer-events: none;
+}
+
+.card {
+  width: 100%;
+  padding: var(--space-8) var(--space-10) var(--space-8);
+  text-align: center;
+  background: var(--color-surface);
+  border-radius: 1.25rem;
+  box-shadow: 0 24px 60px rgb(16 24 40 / 0.12);
+}
+
+.logo {
+  display: inline-block;
+}
+
+.logo img {
+  width: auto;
+  height: 6.75rem;
+}
+
+.title {
+  margin-top: var(--space-4);
+  font-size: clamp(2rem, 1.5rem + 1.2vw, 2.5rem);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+}
+
+/* Petits écrans : formulaire centré, panneau visuel masqué */
+@media (max-width: 1100px) {
+  .page {
+    background: var(--color-surface-warm);
+  }
+
+  .zone {
+    width: min(40rem, 100%);
+    margin-inline: auto;
+    padding: var(--space-4) var(--container-gutter) var(--space-8);
+  }
+}
+
+@media (max-width: 560px) {
+  .card {
+    padding: var(--space-8) var(--space-5) var(--space-8);
+  }
+
+  .logo img {
+    height: 5rem;
+  }
+}

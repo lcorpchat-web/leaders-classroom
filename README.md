@@ -28,7 +28,7 @@ docker compose up -d   # PostgreSQL 16 sur localhost:5434
 
 ```bash
 cd backend
-cp .env.example .env   # puis adapter les valeurs
+cp .env.example .env   # puis adapter les valeurs, dont JWT_SECRET (commande de génération dans le fichier)
 npm install
 npm run db:generate    # génère le client Prisma
 npm run db:migrate     # applique les migrations

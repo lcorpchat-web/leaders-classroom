@@ -1,0 +1,167 @@
+.visual {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 58.6%;
+  overflow: hidden;
+  color: var(--color-text-inverse);
+  background:
+    linear-gradient(150deg, var(--color-navy-light) 0%, transparent 32%),
+    linear-gradient(180deg, #0a2946 0%, var(--color-navy) 55%, #041628 100%);
+}
+
+/* Photo à droite du panneau, fondue vers le bleu */
+.photo {
+  position: absolute;
+  z-index: 0;
+  top: 20.5%;
+  right: 0;
+  width: 51%;
+  height: 73.2%;
+  object-fit: cover;
+  object-position: left top;
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 22%), linear-gradient(to bottom, transparent 0, #000 12%);
+  mask-composite: intersect;
+}
+
+/* Vague orange en bas du panneau */
+.wave {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 30%;
+  background: linear-gradient(105deg, #ff6a00 0%, #f05f00 35%, #c24a02 65%, #7a3a12 100%);
+  clip-path: polygon(0 0, 100% 82%, 100% 100%, 0 100%);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 2.3rem clamp(2rem, 4.4vw, 4.25rem) 0;
+}
+
+.logoBubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(27rem, 72%);
+  height: 10.5rem;
+  margin-left: clamp(4rem, 8vw, 8rem);
+  background: var(--color-surface);
+  border-radius: 6rem 2.75rem 2.75rem 6rem;
+}
+
+.logoBubble img {
+  width: auto;
+  height: 7.25rem;
+}
+
+.brand {
+  margin-top: var(--space-2);
+  font-size: clamp(1.75rem, 1rem + 1.4vw, 2.375rem);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+.tagline {
+  margin-top: var(--space-1);
+  font-size: var(--font-size-xl);
+  color: var(--color-text-inverse-muted);
+}
+
+.atouts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: 27rem;
+  margin-top: var(--space-6);
+  margin-left: calc(-1 * var(--space-3));
+}
+
+.atout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+.atoutIcon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  background: var(--color-primary);
+  border-radius: 50%;
+}
+
+.atoutTitle {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.atoutText {
+  margin-top: var(--space-2);
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--color-text-inverse-muted);
+}
+
+.quote {
+  position: absolute;
+  z-index: 2;
+  bottom: 9.5%;
+  left: clamp(2rem, 4.4vw, 4.25rem);
+  font-size: clamp(1.25rem, 0.8rem + 0.9vw, 1.625rem);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.4;
+}
+
+.quoteIcon {
+  display: block;
+  height: 2.75rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 6rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 0.85;
+}
+
+.dots {
+  position: absolute;
+  z-index: 2;
+  bottom: 4.4%;
+  left: 51%;
+  display: flex;
+  gap: var(--space-4);
+}
+
+.dots span {
+  width: 2.5rem;
+  height: 0.3rem;
+  background: rgb(255 255 255 / 0.85);
+  border-radius: var(--radius-pill);
+}
+
+.dots span:first-child {
+  width: 4.75rem;
+  background: var(--color-primary);
+}
+
+.dots span:last-child {
+  width: 1.9rem;
+}
+
+/* Petits écrans : panneau masqué, seul le formulaire est affiché */
+@media (max-width: 1100px) {
+  .visual {
+    display: none;
+  }
+}
+
+@media (max-height: 820px) {
+  .atouts {
+    gap: var(--space-5);
+  }
+}

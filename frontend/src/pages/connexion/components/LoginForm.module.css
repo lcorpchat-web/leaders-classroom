@@ -1,0 +1,137 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+/* Onglets de profil */
+.profils {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: var(--space-1);
+  padding: 2px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.profil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: 3.25rem;
+  padding-inline: var(--space-2);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  border-radius: var(--radius-sm);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.profil + .profil:not(.profilActif) {
+  box-shadow: inset 1px 0 0 var(--color-border);
+}
+
+.profil:hover:not(.profilActif) {
+  background: var(--color-primary-soft);
+}
+
+.profilActif {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-inverse);
+  background: var(--color-primary);
+}
+
+.profilActif + .profil {
+  box-shadow: none;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.lien {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-link);
+}
+
+.lien:hover {
+  text-decoration: underline;
+}
+
+.submit {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-xl);
+}
+
+.separateur {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+}
+
+.separateur::before,
+.separateur::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-input-border);
+}
+
+.google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  min-height: 3.875rem;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-input-border);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.google:hover {
+  background: #f8f9fb;
+}
+
+.inscription {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.inscription .lien {
+  font-weight: var(--font-weight-bold);
+}
+
+@media (max-width: 560px) {
+  .form {
+    margin-top: var(--space-6);
+  }
+
+  .profil {
+    flex-direction: column;
+    gap: var(--space-1);
+    min-height: 3.75rem;
+    font-size: 0.8125rem;
+  }
+
+  .profilIcon {
+    width: 20px;
+    height: 20px;
+  }
+}
