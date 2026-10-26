@@ -1,0 +1,13 @@
+.vignette {
+  display: block;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.defaut {
+  display: grid;
+  place-items: center;
+  color: var(--color-text-inverse);
+  background: linear-gradient(135deg, #051e37 0%, #0b3460 50%, var(--color-primary) 130%);
+}

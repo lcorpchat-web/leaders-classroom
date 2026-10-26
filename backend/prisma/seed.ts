@@ -48,6 +48,7 @@ async function main() {
       nom: 'Gestion de projet - Session 1',
       description: 'Planification, suivi et pilotage de projet',
       dateDebut: new Date('2026-10-01'),
+      capaciteMax: 30,
     },
   });
 

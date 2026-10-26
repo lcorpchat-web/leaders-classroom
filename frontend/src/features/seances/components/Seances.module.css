@@ -1,0 +1,157 @@
+/* ---------- Formulaire ---------- */
+.formulaire {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.pleineLargeur {
+  grid-column: 1 / -1;
+}
+
+.repetition {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: auto minmax(0, 14rem);
+  align-items: end;
+  gap: var(--space-6);
+  padding: var(--space-4);
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-md);
+}
+
+.repetition > label:first-child {
+  align-self: center;
+}
+
+@media (max-width: 640px) {
+  .formulaire,
+  .repetition {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Fiche ---------- */
+.fiche {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.ficheListe {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.ficheListe li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ficheListe svg {
+  flex-shrink: 0;
+  color: var(--color-primary);
+}
+
+.lien {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-link);
+}
+
+.lien:hover {
+  text-decoration: underline;
+}
+
+.ficheNote {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---------- Liste compacte ---------- */
+.liste {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.element {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-2);
+  text-align: left;
+  border-radius: var(--radius-md);
+}
+
+.element:hover {
+  background: var(--color-bg-muted);
+}
+
+.annulee .elementTitre {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.date {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.5rem;
+  border-radius: var(--radius-md);
+}
+
+.dateJour {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1;
+}
+
+.dateMois {
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+}
+
+.elementTexte {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.elementTitre {
+  overflow: hidden;
+  font-weight: var(--font-weight-bold);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.elementClasse {
+  overflow: hidden;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.elementInfos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  margin-top: 2px;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.elementInfos span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}

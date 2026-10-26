@@ -63,4 +63,25 @@ export const env = {
   sessionDureeHeures: readPositiveInt('SESSION_DUREE_HEURES', 8),
   /** Durée d'une session « Se souvenir de moi » (cookie persistant) */
   sessionSouvenirJours: readPositiveInt('SESSION_SOUVENIR_JOURS', 30),
+  /** Fuseau horaire de référence de l'Institut (messages et règles horaires côté serveur) */
+  fuseauHoraire: process.env.FUSEAU_HORAIRE ?? 'Africa/Douala',
+  /** Adresse publique de l'application (retour de BigBlueButton, URL de rappel de fin de séance) */
+  appUrl: (process.env.APP_URL ?? 'http://localhost:5173').replace(/\/$/, ''),
+  bbb: {
+    /** Ex. https://bbb.exemple.com/bigbluebutton/ — vide : mode simulation (développement uniquement) */
+    url: (process.env.BBB_URL ?? '').replace(/\/?$/, '/').replace(/^\/$/, ''),
+    secret: process.env.BBB_SECRET ?? '',
+    algorithme: (process.env.BBB_CHECKSUM ?? 'sha256') as 'sha1' | 'sha256',
+  },
+  supports: {
+    /** Dossier de stockage des supports (figure 13 : uploads/), jamais servi directement */
+    dossier: process.env.UPLOADS_DIR ?? 'uploads',
+    tailleMaxMo: readPositiveInt('SUPPORT_TAILLE_MAX_MO', 25),
+  },
+  presence: {
+    /** Arrivée au-delà de ce délai après le début : RETARD */
+    retardMinutes: readPositiveInt('PRESENCE_RETARD_MINUTES', 10),
+    /** Durée cumulée inférieure à ce pourcentage de la séance : ABSENT */
+    dureeMinPourcent: readPositiveInt('PRESENCE_DUREE_MIN_POURCENT', 50),
+  },
 } as const;

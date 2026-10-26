@@ -1,0 +1,308 @@
+.etroit {
+  max-width: 52rem;
+}
+
+.colonne {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.deuxColonnes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+@media (max-width: 640px) {
+  .deuxColonnes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.bouton {
+  align-self: flex-start;
+}
+
+.note {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.erreur {
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+}
+
+.lienDiscret {
+  font-size: var(--font-size-sm);
+  color: var(--color-link);
+}
+
+/* ---------- Photo ---------- */
+.photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.photoCadre {
+  position: relative;
+}
+
+.photoBouton {
+  position: absolute;
+  right: 0.25rem;
+  bottom: 0.25rem;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--color-text-inverse);
+  background: #1e2433;
+  border: 3px solid var(--color-surface);
+  border-radius: 50%;
+}
+
+.photoBouton:hover {
+  background: var(--color-primary);
+}
+
+.parametresProfil {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-8);
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .parametresProfil {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Mon profil (maquette 06) ---------- */
+.profilGrille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .profilGrille {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.carte {
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 10px rgb(16 24 40 / 0.05);
+}
+
+.carteEntete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.carteIcone {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--color-text-inverse);
+  background: var(--color-primary);
+  border-radius: var(--radius-md);
+}
+
+.carteTitres {
+  flex: 1;
+  min-width: 12rem;
+}
+
+.carteTitres h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1.2;
+}
+
+.carteTitres p {
+  color: var(--color-text-muted);
+}
+
+.titreCarte {
+  flex: 1;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.voirTout {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-link);
+}
+
+.selectPeriode {
+  min-height: 2.25rem;
+  padding: 0 var(--space-3);
+  font-size: var(--font-size-sm);
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--radius-sm);
+}
+
+.identite {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.identiteNom {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.identiteRole {
+  margin-bottom: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.coordonnees {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+}
+
+.coordonnees li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.coordonnees svg {
+  color: var(--color-text-muted);
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  gap: var(--space-3) var(--space-4);
+  margin-top: var(--space-5);
+  font-size: var(--font-size-sm);
+}
+
+.details dt {
+  font-weight: var(--font-weight-semibold);
+}
+
+.details dd {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.biographie {
+  white-space: pre-line;
+}
+
+@media (max-width: 560px) {
+  .details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.tuiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .tuiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.tuiles li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-2);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  border-radius: var(--radius-md);
+}
+
+.tuiles strong {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text);
+}
+
+.tuileOrange {
+  background: #fff4ea;
+}
+
+.tuileVerte {
+  background: #ecfdf3;
+}
+
+.tuileViolette {
+  background: #f4f3ff;
+}
+
+.tuileBleue {
+  background: #eff6ff;
+}
+
+.classes {
+  display: flex;
+  flex-direction: column;
+}
+
+.classe {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+}
+
+.classes li + li .classe {
+  border-top: 1px solid var(--color-border);
+}
+
+.classeVignette {
+  width: 5rem;
+  height: 3.5rem;
+}
+
+.classeTexte {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  font-size: var(--font-size-sm);
+}
+
+.classeTexte span {
+  color: var(--color-text-muted);
+}

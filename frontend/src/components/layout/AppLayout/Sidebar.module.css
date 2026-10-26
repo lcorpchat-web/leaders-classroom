@@ -1,0 +1,145 @@
+.sidebar {
+  position: fixed;
+  z-index: 70;
+  inset: 0 auto 0 0;
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-width);
+  overflow-y: auto;
+  color: var(--color-text-inverse);
+  background: #051e37;
+}
+
+/* Bloc blanc du logo, coin arrondi en bas à droite (maquettes) */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-surface);
+  border-bottom-right-radius: 1.75rem;
+}
+
+.logo img {
+  width: auto;
+  height: 4.75rem;
+}
+
+.fermer {
+  display: none;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--color-text);
+  border-radius: var(--radius-sm);
+}
+
+.marque {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-5) var(--space-4);
+}
+
+.marque img {
+  padding: 3px;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+}
+
+.marqueNom {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+.marqueSlogan {
+  font-size: 0.875rem;
+  color: rgb(255 255 255 / 0.8);
+}
+
+.nav {
+  padding: 0 var(--space-3);
+}
+
+.liste {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lien {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: rgb(255 255 255 / 0.92);
+  text-align: left;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.lien:hover {
+  background: rgb(255 255 255 / 0.08);
+}
+
+.actif,
+.actif:hover {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-inverse);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-button);
+}
+
+.separateur {
+  margin: var(--space-3) var(--space-4);
+  border: 0;
+  border-top: 1px solid rgb(255 255 255 / 0.12);
+}
+
+/* Bas de la barre : illustration, vague orange et devise de l'Institut (maquettes) */
+.bas {
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+
+.illustration {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.citation {
+  padding: var(--space-2) var(--space-5) var(--space-6);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.35;
+  background: linear-gradient(180deg, #c94a02 0%, #e85d00 45%, #ff7a12 100%);
+}
+
+@media (max-height: 820px) {
+  .bas {
+    display: none;
+  }
+}
+
+/* Mobile : barre latérale en tiroir */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 200ms ease;
+  }
+
+  .ouvert {
+    transform: none;
+    box-shadow: 0 0 48px rgb(0 0 0 / 0.35);
+  }
+
+  .fermer {
+    display: grid;
+  }
+}

@@ -65,7 +65,13 @@ model Utilisateur {
   matricule         String?  @unique
   /// Enseignant uniquement
   specialite        String?
+  /// Profil (maquette 06) : photo (nom du fichier dans uploads/images), ville, biographie
+  photo             String?
+  ville             String?
+  biographie        String?
   actif             Boolean  @default(true)
+  /// Mot de passe provisoire attribué par l'administration : à changer à la prochaine connexion
+  doitChangerMotDePasse Boolean @default(false) @map("doit_changer_mot_de_passe")
   creeLe            DateTime @default(now()) @map("cree_le")
 
   /// Enseignant — « enseigne » (classes affectées)
@@ -76,6 +82,8 @@ model Utilisateur {
   seancesAnimees    Seance[]
   /// « participant » — une présence par entrée dans une salle
   presences         Presence[]
+  /// Supports déposés (enseignant ou administration)
+  supportsDeposes   Support[]
 
   @@map("utilisateurs")
 }
@@ -87,7 +95,15 @@ model Classe {
   description String?
   dateDebut   DateTime  @map("date_debut") @db.Date
   dateFin     DateTime? @map("date_fin") @db.Date
+  /// Nombre maximal d'apprenants inscrits (validés) ; vide = illimité
+  capaciteMax Int?      @map("capacite_max")
+  /// Maquette 04 : image de la classe (nom du fichier dans uploads/images), catégorie, niveau, langue
+  image       String?
+  categorie   String?
+  niveau      String?
+  langue      String?
   active      Boolean   @default(true)
+  creeLe      DateTime  @default(now()) @map("cree_le")
 
   affectations Affectation[]
   inscriptions Inscription[]
@@ -180,9 +196,12 @@ model Support {
   typeMime     String   @map("type_mime")
   tailleOctets Int      @map("taille_octets")
   deposeLe     DateTime @default(now()) @map("depose_le")
+  /// Ajout au modèle : auteur du dépôt (traçabilité)
+  deposeParId  String?  @db.Uuid @map("depose_par_id")
 
-  classe Classe  @relation(fields: [classeId], references: [id], onDelete: Restrict)
-  seance Seance? @relation(fields: [seanceId], references: [id], onDelete: SetNull)
+  classe    Classe       @relation(fields: [classeId], references: [id], onDelete: Restrict)
+  seance    Seance?      @relation(fields: [seanceId], references: [id], onDelete: SetNull)
+  deposePar Utilisateur? @relation(fields: [deposeParId], references: [id], onDelete: SetNull)
 
   @@index([classeId])
   @@map("supports")

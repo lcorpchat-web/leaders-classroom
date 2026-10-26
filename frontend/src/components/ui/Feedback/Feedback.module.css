@@ -1,0 +1,42 @@
+.etat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-12) var(--space-4);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.spinner {
+  color: var(--color-primary);
+  animation: rotation 0.9s linear infinite;
+}
+
+@keyframes rotation {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.iconeVide {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: var(--space-2);
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  border-radius: 50%;
+}
+
+.titre {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.message {
+  max-width: 28rem;
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-sm);
+}

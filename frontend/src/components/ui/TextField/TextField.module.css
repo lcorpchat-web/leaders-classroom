@@ -73,3 +73,27 @@
 .toggle:hover {
   color: var(--color-text);
 }
+
+.select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.select + .icon {
+  pointer-events: none;
+}
+
+.controlMultiligne {
+  align-items: stretch;
+  padding-block: var(--space-2);
+}
+
+.textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.requis {
+  margin-left: 0.125rem;
+  color: var(--color-danger);
+}

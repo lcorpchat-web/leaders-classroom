@@ -1,0 +1,44 @@
+.shell {
+  --sidebar-width: 17.5rem;
+
+  display: flex;
+  min-height: 100dvh;
+  background: var(--color-bg-muted);
+}
+
+.principal {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  margin-left: var(--sidebar-width);
+}
+
+.contenu {
+  flex: 1;
+  width: 100%;
+  max-width: 90rem;
+  padding: var(--space-8) clamp(1rem, 3vw, 2.5rem) var(--space-12);
+}
+
+.voile {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .principal {
+    margin-left: 0;
+  }
+
+  .voile {
+    position: fixed;
+    z-index: 60;
+    inset: 0;
+    display: block;
+    background: rgb(5 30 55 / 0.5);
+  }
+
+  .contenu {
+    padding-top: var(--space-6);
+  }
+}

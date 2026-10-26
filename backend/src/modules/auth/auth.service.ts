@@ -1,10 +1,19 @@
 import bcrypt from 'bcryptjs';
 import { prisma } from '../../lib/prisma.js';
 import { HttpError } from '../../utils/http-error.js';
+import { verifierMotDePasse } from '../../utils/mot-de-passe.js';
 import type { ConnexionInput } from './auth.schemas.js';
 import type { UtilisateurSession } from './auth.types.js';
 
-const champsSession = { id: true, nom: true, prenom: true, email: true, role: true } as const;
+export const champsSession = {
+  id: true,
+  nom: true,
+  prenom: true,
+  email: true,
+  role: true,
+  photo: true,
+  doitChangerMotDePasse: true,
+} as const;
 
 // Hachage factice comparé quand l'e-mail est inconnu : le temps de réponse reste identique,
 // ce qui empêche de deviner quels e-mails possèdent un compte.
@@ -20,7 +29,7 @@ export async function authentifier({ email, motDePasse }: ConnexionInput): Promi
     select: { ...champsSession, motDePasseHache: true, actif: true },
   });
 
-  const motDePasseValide = await bcrypt.compare(motDePasse, utilisateur?.motDePasseHache ?? HACHAGE_FACTICE);
+  const motDePasseValide = await verifierMotDePasse(motDePasse, utilisateur?.motDePasseHache ?? HACHAGE_FACTICE);
 
   if (!utilisateur || !utilisateur.actif || !motDePasseValide) {
     throw new HttpError(401, 'Identifiants incorrects', 'IDENTIFIANTS_INCORRECTS');

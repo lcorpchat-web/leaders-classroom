@@ -1,0 +1,105 @@
+.calendrier {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.entete button {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-sm);
+}
+
+.entete button:hover {
+  background: var(--color-bg-muted);
+}
+
+.mois {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.grille {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  row-gap: var(--space-1);
+  text-align: center;
+}
+
+.jourSemaine {
+  padding-bottom: var(--space-2);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.jour {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin: 0 auto;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border-radius: 50%;
+}
+
+.jour:hover:not(.horsMois) {
+  background: var(--color-bg-muted);
+}
+
+.horsMois {
+  pointer-events: none;
+}
+
+.weekEnd {
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-regular);
+}
+
+.avecSeance {
+  background: var(--color-primary-soft);
+}
+
+.aujourdhui,
+.aujourdhui:hover {
+  color: var(--color-text-inverse) !important;
+  background: var(--color-primary) !important;
+}
+
+.pastille {
+  position: absolute;
+  bottom: -2px;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+}
+
+.legende {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.legende li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.legendePastille {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+}

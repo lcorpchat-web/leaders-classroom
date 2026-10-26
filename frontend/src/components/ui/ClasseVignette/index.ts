@@ -1,0 +1,1 @@
+export { ClasseVignette } from './ClasseVignette'

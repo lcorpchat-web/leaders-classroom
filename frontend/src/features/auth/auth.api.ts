@@ -1,7 +1,7 @@
 import { apiRequest } from '@/lib/api/client'
-import type { ConnexionDonnees, Utilisateur } from './auth.types'
+import type { ChangementMotDePasse, ConnexionDonnees, Utilisateur } from './auth.types'
 
-/** Appels de l'API d'authentification (cahier de conception, section 11). */
+/** Appels de l'API d'authentification et de l'espace personnel. */
 export const authApi = {
   async connexion(donnees: ConnexionDonnees): Promise<Utilisateur> {
     const { utilisateur } = await apiRequest<{ utilisateur: Utilisateur }>('/auth/connexion', {
@@ -18,5 +18,9 @@ export const authApi = {
   async moi(): Promise<Utilisateur> {
     const { utilisateur } = await apiRequest<{ utilisateur: Utilisateur }>('/moi')
     return utilisateur
+  },
+
+  changerMotDePasse(donnees: ChangementMotDePasse): Promise<void> {
+    return apiRequest<void>('/moi/mot-de-passe', { method: 'PATCH', body: donnees })
   },
 }

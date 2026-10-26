@@ -15,6 +15,10 @@
     transform var(--transition-fast);
 }
 
+.button svg {
+  flex-shrink: 0;
+}
+
 .button:active {
   transform: translateY(1px);
 }
@@ -25,6 +29,15 @@
 }
 
 /* Tailles */
+.sm {
+  min-height: 2.25rem;
+  padding: 0 var(--space-3);
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-sm);
+}
+
 .md {
   min-height: 3.375rem; /* 54px */
   padding: 0 var(--space-8);
@@ -75,4 +88,25 @@
 .outlineLight:hover {
   background: rgb(255 255 255 / 0.12);
   border-color: var(--color-text-inverse);
+}
+
+/* Bouton discret (actions de tableau) */
+.ghost {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  background: transparent;
+}
+
+.ghost:hover {
+  background: var(--color-bg-muted);
+}
+
+.danger {
+  color: var(--color-text-inverse);
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.danger:hover {
+  background: #a51f1f;
 }

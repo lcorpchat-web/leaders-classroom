@@ -1,0 +1,228 @@
+/* ---------- Salle ---------- */
+.salle {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  color: var(--color-text-inverse);
+  background: #051e37;
+}
+
+.bandeau {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-6);
+  padding: var(--space-3) var(--space-5);
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+.logo img {
+  width: auto;
+  height: 3.25rem;
+}
+
+.titres {
+  flex: 1;
+  min-width: 12rem;
+}
+
+.titres h1 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+}
+
+.titres p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.indicateurs,
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.direct,
+.nbParticipants {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.5rem;
+  padding: 0 var(--space-3);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.pointDirect {
+  width: 0.625rem;
+  height: 0.625rem;
+  background: #e5241b;
+  border-radius: 50%;
+  animation: pulsation 1.6s ease-in-out infinite;
+}
+
+@keyframes pulsation {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.boutonTerminer {
+  color: var(--color-text);
+  background: var(--color-surface);
+  border-color: var(--color-input-border);
+}
+
+.boutonTerminer:hover {
+  background: var(--color-bg-muted);
+  border-color: var(--color-text-muted);
+}
+
+.alerte {
+  margin: var(--space-3) var(--space-5) 0;
+}
+
+.corps {
+  display: grid;
+  flex: 1;
+  grid-template-columns: minmax(0, 1fr) 21rem;
+  gap: var(--space-4);
+  min-height: 0;
+  padding: var(--space-4);
+}
+
+.scene {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  background: #0b2a4a;
+  border-radius: var(--radius-lg);
+}
+
+.iframe {
+  flex: 1;
+  width: 100%;
+  border: 0;
+}
+
+.lienExterne {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  font-size: 0.8125rem;
+  color: var(--color-text-inverse);
+  background: rgb(0 0 0 / 0.55);
+  border-radius: var(--radius-pill);
+}
+
+.simulation {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.simulation svg {
+  color: var(--color-primary);
+}
+
+.simulation h2 {
+  font-size: var(--font-size-xl);
+}
+
+.simulation p {
+  max-width: 34rem;
+  color: rgb(255 255 255 / 0.8);
+}
+
+.lateral {
+  min-height: 0;
+  overflow-y: auto;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+}
+
+@media (max-width: 1024px) {
+  .salle {
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .corps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .scene {
+    min-height: 65dvh;
+  }
+}
+
+/* ---------- Salle d'attente, sortie ---------- */
+.cadre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: 100dvh;
+  padding: var(--space-8) var(--container-gutter);
+  background: var(--color-bg-muted);
+}
+
+.cadreLogo img {
+  width: auto;
+  height: 4.5rem;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: min(100%, 36rem);
+  padding: var(--space-10) var(--space-8);
+  text-align: center;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.message h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.message p {
+  color: var(--color-text-muted);
+}
+
+.messageIcone {
+  color: var(--color-primary);
+}
+
+.messageSeance {
+  color: var(--color-text) !important;
+}
+
+.messageActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}

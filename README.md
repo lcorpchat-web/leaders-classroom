@@ -39,6 +39,11 @@ npm run dev            # http://localhost:4000/api/health
 Scripts : `dev` (rechargement à chaud), `build` (compilation dans `dist/`), `start` (exécute le build), `typecheck`,
 `db:generate`, `db:migrate`, `db:deploy` (production), `db:seed`, `db:reset`, `db:studio` (interface graphique de la base).
 
+**Classe virtuelle (BigBlueButton)** : renseigner `BBB_URL` et `BBB_SECRET` dans `backend/.env`. Sans ces
+valeurs, les salles fonctionnent en **mode simulation** en développement (parcours, présences et clôture
+testables, sans audio ni vidéo) ; en production l'API refuse l'ouverture des salles.
+Les supports de cours déposés sont stockés dans `backend/uploads/` (exclu de Git, à inclure dans les sauvegardes).
+
 Comptes de démonstration (mot de passe `Leaders2026!`, développement uniquement) :
 `admin@`, `paul.mbuye@`, `jean.dupont@`, `samuel.kouame@` suivis de `leaders-classroom.local`.
 

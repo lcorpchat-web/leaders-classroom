@@ -1,5 +1,6 @@
+export { authApi } from './auth.api'
 export { AuthProvider } from './AuthProvider'
 export { RequireAuth } from './RequireAuth'
 export { useAuth } from './useAuth'
 export { libellesRole } from './auth.types'
-export type { ConnexionDonnees, Role, Utilisateur } from './auth.types'
+export type { ChangementMotDePasse, ConnexionDonnees, Role, Utilisateur } from './auth.types'
